@@ -1,47 +1,85 @@
-public class Libro {
+/**
+*Clase, para una cuenta bancaria, con su titular y su saldo
+*@author Terra
+*@version 1.0
+*@since 22-09-2015
+*/
+public class CuentaBancaria {
 
-    private String titulo;
-    private String autor;
-    private int anioPublicacion;
+/**
+*Nombre del titulas
+*/
+    private String titular;
 
-    public Libro(String titulo, String autor, int anioPublicacion) {
-        this.titulo = titulo;
-        this.autor = autor;
-        this.anioPublicacion = anioPublicacion;
+/**
+*Saldo de la cuenta
+*/
+    private double saldo;
+
+/**
+*nos guardamos el nombre del titular y saldo inicial
+*@param titular Nombre el titular de la cuenta
+*@param saldo Saldo inicial de la cuenta
+*/
+    public CuentaBancaria(String titular, double saldoInicial) {
+        this.titular = titular;
+        this.saldo = saldoInicial;
     }
 
-    public String getTitulo() {
-        return titulo;
+/**
+*Devuelve el nombre del titular
+*@returm titular Nombre del titular
+*/
+    public String getTitular() {
+        return titular;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+/**
+*Cambia nombre el titular
+*@param titular Cambio del nombre del titular
+*/
+    public void setTitular(String titular) {
+        this.titular = titular;
     }
 
-    public String getAutor() {
-        return autor;
+/**
+*Devuelve saldo actual
+*@returm saldo Saldo actual de la cuenta
+*/
+    public double getSaldo() {
+        return saldo;
     }
 
-    public void setAutor(String autor) {
-        this.autor = autor;
+/**
+*Calcula el saldo a partir de la cantidad pasada
+*@param cantidad Cantidad introducida por el usuario
+*/
+    public void depositar(double cantidad) {
+        if (cantidad > 0) {
+            saldo += cantidad;
+        }
     }
 
-    public int getAnioPublicacion() {
-        return anioPublicacion;
+/**
+*comprobar si se puede retirar dinero, si te deja lo retira y si no.
+*@param cantidad Cantidad de dinero que se va a retirar de la cuenta.
+*@return  devuelve si se a podido retirar o no el saldo.
+*/    
+public boolean retirar(double cantidad) {
+        if (cantidad > 0 && cantidad <= saldo) {
+            saldo -= cantidad;
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public void setAnioPublicacion(int anioPublicacion) {
-        this.anioPublicacion = anioPublicacion;
-    }
-
-    public int calcularAntiguedad() {
-        int anioActual = java.time.Year.now().getValue();
-        return anioActual - this.anioPublicacion;
-    }
-
+/**
+*Mostrar en pantalla el titular y el saldo
+*/
     public void mostrarInformacion() {
-        System.out.println("Título: " + titulo);
-        System.out.println("Autor: " + autor);
-        System.out.println("Año de publicación: " + anioPublicacion);
+        System.out.println("Titular: " + titular);
+        System.out.println("Saldo actual: " + saldo);
     }
 }
+
